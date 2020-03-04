@@ -44,10 +44,10 @@ export async function run() {
       jobId = sha;
     }
 
-    core.debug(`PR: ${JSON.parse(event).number}`)
-    core.debug(`Event: ${event}`)
-    core.debug(`jobId: ${jobId}`)
-    core.debug(`GITHUB_REPOSITORY: ${process.env.GITHUB_REPOSITORY}`)
+    console.log('PR:', JSON.parse(event).number)
+    console.log('Event:', event)
+    console.log('jobId:', jobId)
+    console.log('GITHUB_REPOSITORY:', process.env.GITHUB_REPOSITORY)
 
     process.env.COVERALLS_SERVICE_JOB_ID = jobId
 
@@ -71,8 +71,8 @@ export async function run() {
           if (error) {
             throw new Error(error);
           }
-          core.debug(`Response: ${response}`)
-          core.debug(`Data: ${JSON.stringify(data)}`)
+          console.log('Response:', response)
+          console.log('Data:', JSON.stringify(data))
           try {
             if (data.done) {
               core.setOutput('coveralls-api-result', JSON.stringify(data));
