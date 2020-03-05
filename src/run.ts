@@ -36,13 +36,13 @@ export async function run() {
 
     const jobId = process.env.GITHUB_RUN_ID;
 
-    // if (process.env.GITHUB_EVENT_NAME == 'pull_request') {
-    //   const pr = JSON.parse(event).number;
-    //   process.env.CI_PULL_REQUEST = pr;
-    //   jobId = `${sha}-PR-${pr}`;
-    // } else {
-    //   jobId = sha;
-    // }
+    if (process.env.GITHUB_EVENT_NAME == 'pull_request') {
+      const pr = JSON.parse(event).number;
+      process.env.CI_PULL_REQUEST = pr;
+      // jobId = `${sha}-PR-${pr}`;
+    } else {
+      // jobId = sha;
+    }
 
     console.log('PR:', JSON.parse(event).number)
     console.log('jobId:', jobId)
