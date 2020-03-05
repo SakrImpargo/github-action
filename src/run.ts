@@ -50,7 +50,8 @@ export async function run() {
     console.log('GITHUB_REPOSITORY:', process.env.GITHUB_REPOSITORY)
 
     const identifier = core.getInput('service-identifier')
-    process.env.COVERALLS_SERVICE_JOB_ID = identifier ? `${jobId}-${core.getInput('service-identifier')}` : jobId
+    process.env.COVERALLS_SERVICE_JOB_ID = identifier ? `${jobId}-${identifier}` : jobId
+    console.log(process.env.COVERALLS_SERVICE_JOB_ID)
 
     const endpoint = core.getInput('coveralls-endpoint');
     if (endpoint != '') {
