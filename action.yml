@@ -20,8 +20,9 @@ inputs:
     required: false
     default: 'https://coveralls.io'
   service-identifier:
-    description: : 'An identifier for the job used in parallel builds'
+    description: 'An identifier for the job used in parallel'
     required: false
+    default: ''
 outputs:
   coveralls-api-result:
     description: 'Result status of Coveralls API post.'
