@@ -32,20 +32,19 @@ export async function run() {
       console.log(event);
     }
 
-    const sha = process.env.GITHUB_SHA!.toString();
+    // const sha = process.env.GITHUB_SHA!.toString();
 
-    let jobId;
+    const jobId = process.env.GITHUB_RUN_ID;
 
-    if (process.env.GITHUB_EVENT_NAME == 'pull_request') {
-      const pr = JSON.parse(event).number;
-      process.env.CI_PULL_REQUEST = pr;
-      jobId = `${sha}-PR-${pr}`;
-    } else {
-      jobId = sha;
-    }
+    // if (process.env.GITHUB_EVENT_NAME == 'pull_request') {
+    //   const pr = JSON.parse(event).number;
+    //   process.env.CI_PULL_REQUEST = pr;
+    //   jobId = `${sha}-PR-${pr}`;
+    // } else {
+    //   jobId = sha;
+    // }
 
     console.log('PR:', JSON.parse(event).number)
-    console.log('Event:', event)
     console.log('jobId:', jobId)
     console.log('GITHUB_REPOSITORY:', process.env.GITHUB_REPOSITORY)
 
@@ -71,7 +70,6 @@ export async function run() {
           if (error) {
             throw new Error(error);
           }
-          console.log('Response:', response)
           console.log('Data:', JSON.stringify(data))
           try {
             if (data.done) {
