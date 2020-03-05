@@ -35,6 +35,7 @@ export async function run() {
     // const sha = process.env.GITHUB_SHA!.toString();
 
     const jobId = process.env.GITHUB_RUN_ID;
+    process.env.COVERALLS_SERVICE_NUMBER = jobId
 
     if (process.env.GITHUB_EVENT_NAME == 'pull_request') {
       const pr = JSON.parse(event).number;
@@ -48,7 +49,7 @@ export async function run() {
     console.log('jobId:', jobId)
     console.log('GITHUB_REPOSITORY:', process.env.GITHUB_REPOSITORY)
 
-    process.env.COVERALLS_SERVICE_JOB_ID = jobId
+    process.env.COVERALLS_SERVICE_JOB_ID = `${jobId}-${core.getInput('service-identifier')}`
 
     const endpoint = core.getInput('coveralls-endpoint');
     if (endpoint != '') {
